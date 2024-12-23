@@ -173,6 +173,7 @@ def get_arxiv_paper(query:str, start:datetime.datetime, end:datetime.datetime, d
                         i.code_url = get_paper_code_url(i)
                         papers.append(i)
                     elif published_date < start:
+                        logger.warning(f'This arxiv paper is published at: {published_date}.')
                         break
                 break
             except Exception as e:
