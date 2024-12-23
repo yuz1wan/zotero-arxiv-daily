@@ -109,17 +109,20 @@ def get_arxiv_paper_from_web(query:str, start:datetime.datetime, end:datetime.da
     all_paper_ids = []
     for cat in cats:
         url = f"https://arxiv.org/list/{cat}/new" #! This only retrieves the latest papers submitted in yesterday
+        logger.info(f"Getting papers from {url}...")
         response = requests.get(url)
         if response.status_code != 200:
             logger.warning(f"Cannot retrieve papers from {url}.")
             continue
         html = response.text
         paper_ids = re.findall(r'arXiv:(\d+\.\d+)', html)
+        logger.info(f"Get paper: {paper_ids}!")
         all_paper_ids.extend(paper_ids)
 
     def is_valid(paper:arxiv.Result):
         published_date = paper.published
         if not (published_date < end and published_date >= start):
+            logger.info(f"The paper is published at {published_date}! It is invalid!!!")
             return False
         stack = []
         op_dict = {
