@@ -280,7 +280,7 @@ if __name__ == '__main__':
     )  # If use_llm_api is True, openai_api_key must be provided
     if args.debug:
         logger.debug("Debug mode is on.")
-    today = datetime.datetime.now(tz=datetime.timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+    today = datetime.datetime.now(tz=datetime.timezone.utc).replace(hour=2, minute=0, second=0, microsecond=0)
     yesterday = today - datetime.timedelta(days=1)
     logger.info("Retrieving Zotero corpus...")
     corpus = get_zotero_corpus(args.zotero_id, args.zotero_key)
