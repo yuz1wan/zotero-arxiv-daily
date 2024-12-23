@@ -163,7 +163,7 @@ def get_arxiv_paper(query:str, start:datetime.datetime, end:datetime.datetime, d
             papers = []
             try:
                 for i in client.results(search):
-                    logger.warning(f'Got arxiv paper: {i.arxiv_id}.')
+                    logger.warning(f'Got arxiv paper: {i.get_short_id()}.')
                     published_date = i.published
                     if published_date < end and published_date >= start:
                         i.arxiv_id = re.sub(r'v\d+$', '', i.get_short_id())
